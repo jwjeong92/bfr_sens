@@ -38,7 +38,12 @@ if __name__ == '__main__':
     parser.add_argument('--use_cuda_graph', type=str2bool, default=False)
     parser.add_argument('--seed', type=int, default=0)
     # Quantization Configs
-    
+    parser.add_argument('--bits_a', type=int, default=16)
+    parser.add_argument('--sym_a', type=str2bool, default=False)
+    parser.add_argument('--groupsize_a', type=int, default=-1)
+    parser.add_argument('--bits_w', type=int, default=4)
+    parser.add_argument('--sym_w', type=str2bool, default=False)
+    parser.add_argument('--groupsize_w', type=int, default=-1)    
     # GPTQ Configs
     
     # SpQR Configs
