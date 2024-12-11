@@ -45,9 +45,10 @@ chat=false
 # Log
 logfile='logs/out.txt'
 # Analysis Tools
-analyze_stats=false
-stats_csv_path='cache/opt-125m-w4a16-rtn.csv'
+analyze_stats=true
+stats_csv_path='cache/opt-125m-w4a16-rtn-stats.csv'
 get_layerwise_distance=false
+distance_csv_path='cache/opt-125m-w4a16-rtn-dist.csv'
 
 for bits_a in 4
 do
@@ -94,7 +95,8 @@ CUDA_VISIBLE_DEVICES=$DEVICES python main.py \
     --logfile $logfile \
     --analyze_stats $analyze_stats \
     --stats_csv_path $stats_csv_path \
-    --get_layerwise_distance $get_layerwise_distance
+    --get_layerwise_distance $get_layerwise_distance \
+    --distance_csv_path $distance_csv_path
 done
 done
 done

@@ -131,6 +131,7 @@ if __name__ == '__main__':
     parser.add_argument('--analyze_stats', type=str2bool, default=False)
     parser.add_argument('--stats_csv_path', type=str, default='./cache/stats.csv')
     parser.add_argument('--get_layerwise_distance', type=str2bool, default=False)
+    parser.add_argument('--distance_csv_path', type=str, default='./cache/dist.csv')
     
     args = parser.parse_args()
     set_seed(args.seed)

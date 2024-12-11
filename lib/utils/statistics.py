@@ -125,12 +125,27 @@ def get_layerwise_distance(model, tokenizer, fp_state_dict, args):
     for k, v in q_act_dict['input'].items():
         distance_dict['sqnr'][k] = sqnr(fp_act_dict['input'][k],v)
         distance_dict['mse'][k] = mse(fp_act_dict['input'][k],v)
-
-    logging.info('Layer-wise SQNR')
-    for k, v in distance_dict['sqnr'].items():
-        print(f'{k:50s}: {v:.4f}')
-    logging.info('Layer-wise MSE')
-    for k, v in distance_dict['mse'].items():
-        print(f'{k:50s}: {v:.4f}')
-
+    
+    import pandas as pd
+    contents_list = distance_dict.keys()
+    
+    for content in contents_list:
+        contents = {}
+        for k, v in distance_dict[content].items():
+            if 'head' in k:
+                layer_num = "lm_head"
+                layer_type = "lm_head"
+            else:
+                parts = k.split('.')
+                layer_num = next((part for part in parts if part.isdigit()), "unknown")
+                layer_type = '.'.join(parts[parts.index(layer_num) + 1:])
+            
+            if layer_type not in contents:
+                contents[layer_type] = {}
+            contents[layer_type][layer_num] = v
+    
+        df = pd.DataFrame(contents).transpose()
+        csv_path = args.distance_csv_path.split('.')[0]+'-'+content+'.csv'
+        df.to_csv(csv_path, index=True)
+        logging.info(f'Layer-wise {content.upper()} saved to {csv_path}')
     return distance_dict
