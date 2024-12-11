@@ -117,11 +117,11 @@ if __name__ == '__main__':
     # SpQR Configs
     parser.add_argument('--spqr', type=str2bool, default=False)
     parser.add_argument('--spqr_dataset', type=str, default='pajama')
-    parser.add_argument('--spqr_nsamples', type=int, default=128)
+    parser.add_argument('--spqr_nsample', type=int, default=128)
     parser.add_argument('--spqr_seqlen', type=int, default=2048)
     parser.add_argument('--spqr_true_sequential', type=str2bool, default=False)
     parser.add_argument('--spqr_percdamp', type=float, default=.01)
-    parser.add_argument('--spqr_perm_order', type=str2bool, default=False)
+    parser.add_argument('--spqr_perm_order', type=str, default='identity')
     parser.add_argument('--spqr_outlier_threshold', type=float, default=float("inf"))
     parser.add_argument('--spqr_save_quantization', type=str, default='./cache/spqr_results')
     # Others

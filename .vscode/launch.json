@@ -1,0 +1,59 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid", "830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python 디버거: 인수가 있는 현재 파일",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--model_path", "/raid/LLM/opt-125m", 
+                "--tasks", "none",
+                "--num_fewshot", "none",
+                "--limit", "none",
+                "--eval_ppl", "true",
+                "--eval_ppl_seqlen", "2048",
+                "--user_cuda_graph", "true",
+                "--seed", "0",
+                // Quantization
+                "--bits_a", "8",
+                "--sym_a", "false",
+                "--groupsize_a", "-1",
+                "--bits_w", "8",
+                "--sym_w", "false",
+                "--groupsize_w", "-1",
+                // GPTQ
+                "--gptq", "false",
+                "--gptq_dataset", "c4",
+                "--gptq_nsamples", "128",
+                "--gptq_seqlen", "2048",
+                "--gptq_true_sequential", "false",
+                "--gptq_percdamp", "0.01",
+                "--gptq_act_order", "false",
+                "--gptq_static_groups", "false",
+                // SpQR
+                "--spqr", "false",
+                "--spqr_dataset", "c4",
+                "--spqr_nsamples", "128",
+                "--spqr_seqlen", "2048",
+                "--spqr_true_sequential", "false",
+                "--spqr_percdamp", "0.01",
+                "--spqr_perm_order", "act_order",
+                "--spqr_outlier_threshold", "float('inf')",
+                "--spqr_save_quantization", "./cache/spqr_results",
+                // Chatbot Simulation
+                "--chat", "false",
+                // Log
+                "--logfile", "logs/out.txt",
+                // Analysis Tools
+                "--analyze_stats", "false",
+                "--stats_csv_path", "cache/opt-125m-w4a16.csv",
+                "--get_layerwise_distance", "false",
+            ]
+        }
+    ]
+}
